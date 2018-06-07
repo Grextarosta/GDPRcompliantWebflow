@@ -1,0 +1,185 @@
+<meta name="google-site-verification" content="YOUR_SITE_VERIFICATION_CODE" />
+
+<!-- Celery Plugin -->
+<script src="https://www.trycelery.com/js/celery.js"></script>
+<!-- End Celery Plugin -->
+
+<!-- Cookie Opt In -->
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+
+<script>
+  function deleteCookies () {
+    console.log("deleting cookies");
+    var cookies = document.cookie.split("; ");
+    for (var c = 0; c < cookies.length; c++) {
+      var d = window.location.hostname.split(".");
+      while (d.length > 0) {
+          var cookieBase = encodeURIComponent(cookies[c].split(";")[0].split("=")[0]) + "=; expires=Thu, 01-Jan-1970 00:00:01 GMT; domain=" + d.join(".") + " ;path=";
+          var p = location.pathname.split("/");
+          document.cookie = cookieBase + "/";
+          while (p.length > 0) {
+              document.cookie = cookieBase + p.join("/");
+              p.pop();
+          }
+          d.shift();
+      }
+    }
+  }
+
+  function readCookie(name) {
+    console.log("reading cookie");
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(";");
+    for(var i=0;i < ca.length;i++) {
+      var c = ca[i];
+      while (c.charAt(0)==" ") c = c.substring(1,c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    console.log("First time visit");
+    return null;
+  }
+
+  function allCylinders() {
+    console.log("Fire on all cylinders");
+
+    // Facebook Pixel Granted
+    fbq("consent", "grant");
+
+    // Google Tag Manager Granted
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":
+    new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src=
+    "https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,"script","dataLayer","SOME_MORE_SECRET_GOOGLE_TAGS");
+
+    // Google Site Tag Granted
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "YOUR_GOOGLE_ANALYTICS_TAG");
+
+    // Mailchimp Goal Tag Granted
+    var $mcGoal = {"settings":{"uuid":"SECRET_MAILCHIMP_STUFF"}};
+    (function() {
+      var sp = document.createElement("script"); sp.type = "text/javascript"; sp.async = true; sp.defer = true;
+      sp.src = ("https:" == document.location.protocol ? "https://s3.amazonaws.com/downloads.mailchimp.com" : "http://downloads.mailchimp.com") + "/js/goal.min.js";
+      var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(sp, s);
+    })();
+
+    // Optimonk Exit Intent Granted
+    (function(e,a){
+      var t,r=e.getElementsByTagName("head")[0],c=e.location.protocol;
+      t=e.createElement("script");t.type="text/javascript";
+      t.charset="utf-8";t.async=!0;t.defer=!0;
+      t.src=c+"//front.optimonk.com/public/"+a+"/js/preload.js";r.appendChild(t);
+    })(document,"SECRET_OPTIMONK_STUFF");
+
+    var head = document.getElementsByTagName('head')[0];
+    // <script async src="https://www.googletagmanager.com/gtag/js?id=UA-52762530-1">
+
+    // Google Tag Manager Granted
+    var gooTag = document.createElement("script");
+
+    gooTag.src = "YOUR_GOOGLE_TAG_MANAGER_LINK";
+
+    // Add AddThis Widget
+    var addthis = document.createElement("script");
+
+    addthis.type = "text/javascript";
+    addthis.src = "ADDTHIS_SOURCE";
+
+    head.appendChild(addthis);
+    head.appendChild(gooTag);
+  }
+
+  // Facebook Tracking Pixel
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,"script","//connect.facebook.net/en_US/fbevents.js");
+
+  // Revoke consent at initilize unless consent has explicitly been given
+  var cookieConsent = readCookie("cookieconsent_status");
+  if (cookieConsent !== "allow") {
+    console.log("Cookie Consent not given: fbq pixel consent revoked");
+    fbq("consent", "revoke");
+    deleteCookies();
+  }
+
+  else {
+    console.log("Cookie Consent given");
+    allCylinders();
+  }
+
+  fbq("init", "YOUR_FACEBOOK_PIXEL");
+  fbq("track", "PageView");
+
+  var p;
+  window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#000"
+        },
+        "button": {
+          "background": "transparent",
+          "text": "#f1d600",
+          "border": "#f1d600"
+        }
+      },
+      "type": "opt-in",
+      "content": {
+        "message": "This webpage uses cookies to remember your settings, generate statistics about usage of the website, and to optimize ads served to you throughout the internet. You can change your browser’s cookie settings at any time.",
+        "deny": "Disable Cookies",
+        "allow": "Allow Cookies",
+        "link": "Cookie Policy",
+        "href": "/cookie-policy-playdxtr"
+      },
+      onInitialise: function (status) {
+        var type = this.options.type;
+        var didConsent = this.hasConsented();
+        if (type == "opt-in" && didConsent) {
+          // steady as she goes
+        }
+      },
+      onStatusChange: function(status, chosenBefore) {
+        console.log("onStatusChange responding");
+        var type = this.options.type;
+        var didConsent = this.hasConsented();
+        if (type == "opt-in" && didConsent) {
+          allCylinders();
+          window.location.reload(true);
+        }
+
+        if (type == "opt-in" && !didConsent) {
+          console.log("denying consent");
+          // disable cookies
+          // delete all cookies
+          deleteCookies();
+
+          p.open();
+        }
+      },
+      onRevokeChoice: function() {
+        console.log("onRevokeChoice");
+        var type = this.options.type;
+        if (type == "opt-in") {
+          // delete all cookies
+          deleteCookies();
+
+          // Consent revoked from Facebook Pixel, stop facebook pixel tracking
+          fbq("consent", "revoke");
+
+          window.location.reload(true);
+        }
+      },
+    }, function (popup) {
+      p = popup;
+    }, function (err) {
+      console.error(err);
+    });
+  });
+</script>
+<!-- End Cookie Opt In -->

@@ -1,0 +1,21 @@
+<script>
+  window.addEventListener("load", function(){
+    document.getElementById("btn-allowCookie").onclick = function (e) {
+      console.log("calling onStatusChange, allow");
+      p.setStatus(cookieconsent.status.allow);
+      p.close();
+    };
+
+    document.getElementById("btn-denyCookie").onclick = function (e) {
+      console.log("calling onStatusChange, deny");
+      p.setStatus(cookieconsent.status.deny);
+      p.close();
+    };
+
+    document.getElementById("btn-revokeChoice").onclick = function (e) {
+      console.log("calling onRevokeChoice");
+      p.revokeChoice();
+      //p.setStatus(cookieconsent.status.deny);
+    };
+	});
+</script>
